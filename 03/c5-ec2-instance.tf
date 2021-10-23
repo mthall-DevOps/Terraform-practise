@@ -1,6 +1,6 @@
 
 resource "aws_instance" "MY-VM" {
-  ami = data.aws_ami.amzlinux2.id
+  ami = data.aws_ami.amzlinux2.id 
   instance_type = var.aws_instance
   user_data = file("${path.module}/sampleapp1.sh")
   key_name = var.aws_keypair
