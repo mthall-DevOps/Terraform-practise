@@ -5,7 +5,7 @@ variable "aws_region" {
   default = "ap-south-1"
 }
 #aws instance
-variable "aws_instance" {
+variable "instance_type" {
   description = "aws instance"
   type = string
   default = "t2.micro"
