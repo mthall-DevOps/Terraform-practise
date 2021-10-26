@@ -2,6 +2,12 @@
 output "for_output_list" {
   description = "Output in list"
   value = [for instance in aws_instance.MY-VM: instance.public_dns]
+  #value = [for instance in aws_instance.MY-VM: instance.public_ip]
+}
+output "for_output_list_publicip" {
+  description = "Output in list public IP"
+  #value = [for instance in aws_instance.MY-VM: instance.public_dns]
+  value = toset([for instance in aws_instance.MY-VM: instance.public_ip])
 }
 #outputs - for loop in Map
 output "for_output_Map" {
@@ -11,8 +17,9 @@ output "for_output_Map" {
 #outputs - for loop in Map Advanced
 output "for_output_MapAdv" {
   description = "Output in MapAdv"
-  value = {for c, instance in aws_instance.MY-VM: c => instance.public_dns}
+  value = tomap({for az, instance in aws_instance.MY-VM: az => instance.public_dns})
 }
+/*
 #outputs- Legacy splat opeartor
 output "Legacy_splat_instance_publicdns" {
   description = "legacy splat expression"
@@ -24,3 +31,4 @@ output "latest_splat_instance_publicdns" {
   description = "Generalized Splat Expression"
   value = aws_instance.MY-VM[*].public_dns
 }
+*/
