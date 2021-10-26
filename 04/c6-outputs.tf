@@ -13,16 +13,12 @@ output "for_output_MapAdv" {
   description = "Output in MapAdv"
   value = {for c, instance in aws_instance.MY-VM: c => instance.public_dns}
 }
-#outputd- Legacy splat opeartor
+#outputs- Legacy splat opeartor
 output "Legacy_splat_instance_publicdns" {
   description = "legacy splat expression"
   value = aws_instance.MY-VM.*.public_dns
 }
-#outputd- Legacy splat opeartor
-output "Legacy_splat_instance_publicdns" {
-  description = "legacy splat expression"
-  value = aws_instance.MY-VM.*.public_dns
-}
+
 # Output Latest Generalized Splat Operator - Returns the List
 output "latest_splat_instance_publicdns" {
   description = "Generalized Splat Expression"
