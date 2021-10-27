@@ -21,12 +21,12 @@ data "aws_ec2_instance_type_offerings" "my_ins_type" {
 
 
 # Output
-output "output_v2_1" {
+output "output_v3_1" {
  #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
  value = toset([ for t in data.aws_ec2_instance_type_offerings.my_ins_type2: t.instance_types])
 }
 
-output "output_v2_2" {
+output "output_v3_2" {
  #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
  #value = toset([ for t in data.aws_ec2_instance_type_offerings.my_ins_type2: t.instance_types])
  value = {
