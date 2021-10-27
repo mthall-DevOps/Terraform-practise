@@ -18,27 +18,32 @@ data "aws_ec2_instance_type_offerings" "my_ins_type" {
   }
   location_type = "availability-zone"
 }
-
-
-# Output
+#basic output
 output "output_v3_1" {
- #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
- value = toset([ for t in data.aws_ec2_instance_type_offerings.my_ins_type: t.instance_types])
-}
-
-output "output_v3_2" {
- #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
- #value = toset([ for t in data.aws_ec2_instance_type_offerings.my_ins_type2: t.instance_types])
  value = {
    for az, i in data.aws_ec2_instance_type_offerings.my_ins_type: az => i.instance_types
  }
 }
 
 #filtered output
-output "output_v3_3" {
+output "output_v3_2" {
 value = {
    for az, i in data.aws_ec2_instance_type_offerings.my_ins_type: 
    az => i.instance_types if length(i.instance_types) != 0
  }
+}
+#take only keys
+output "output_v3_2" {
+value = keys({
+   for az, i in data.aws_ec2_instance_type_offerings.my_ins_type: 
+   az => i.instance_types if length(i.instance_types) != 0
+ })
+}
+#only one value from the list of keys
+output "output_v3_2" {
+value = keys({
+   for az, i in data.aws_ec2_instance_type_offerings.my_ins_type: 
+   az => i.instance_types if length(i.instance_types) != 0
+ })[0]
 }
 
