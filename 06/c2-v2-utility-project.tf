@@ -22,7 +22,7 @@ output "output_v2_1" {
 output "output_v2_2" {
  #value = data.aws_ec2_instance_type_offerings.my_ins_type1.instance_types
  #value = toset([ for t in data.aws_ec2_instance_type_offerings.my_ins_type2: t.instance_types])
- value = {
+ value = tomap({
    for az, i in data.aws_ec2_instance_type_offerings.my_ins_type2: az => i.instance_types
- }
-}
+ })
+
